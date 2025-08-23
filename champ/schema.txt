@@ -1,0 +1,36 @@
+alerts	id	bigint	NO	
+alerts	session_id	bigint	NO	
+alerts	level	enum	YES	info
+alerts	message	text	YES	
+alerts	created_at	datetime	NO	CURRENT_TIMESTAMP
+recommendations	id	bigint	NO	
+recommendations	session_id	bigint	NO	
+recommendations	title	varchar	YES	
+recommendations	category	varchar	YES	
+recommendations	description	text	YES	
+recommendations	created_at	datetime	NO	CURRENT_TIMESTAMP
+sensor_data	id	bigint	NO	
+sensor_data	session_id	bigint	NO	
+sensor_data	timestamp	double	NO	
+sensor_data	left_foot	json	NO	
+sensor_data	right_foot	json	NO	
+sessions	id	bigint	NO	
+sessions	user_id	bigint	NO	
+sessions	status	enum	NO	active
+sessions	start_time	datetime	NO	CURRENT_TIMESTAMP
+sessions	end_time	datetime	YES	
+sessions	posture_score	decimal	YES	
+sessions	gait_symmetry	decimal	YES	
+sessions	balance_score	decimal	YES	
+sessions	step_count	int	YES	
+sessions	stride_time_s	decimal	YES	
+sessions	stride_length_m	decimal	YES	
+sessions	contact_time_s	decimal	YES	
+sessions	cadence_spm	decimal	YES	
+sessions	swing_stance_ratio	decimal	YES	
+sessions	heel_toe_timing	json	YES	
+users	id	bigint	NO	
+users	external_id	varchar	YES	
+users	name	varchar	YES	
+users	email	varchar	YES	
+users	created_at	datetime	NO	CURRENT_TIMESTAMP

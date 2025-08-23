@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Champ Dashboard</title>
+  <link rel="stylesheet" href="/static/dashboard.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>Champ Dashboard</h1>
+      <div class="user-panel">
+        <label for="userId">User</label>
+        <input id="userId" type="text" value="1" />
+        <button id="refreshBtn" title="Refresh overview">↻</button>
+      </div>
+    </header>
+
+    <main>
+      <section id="left">
+        <div id="chat">
+          <div id="messages"></div>
+          <div id="composer">
+            <div id="quick-prompts">
+              <button data-q="Show my last 10 sessions with start and end time">Last 10 sessions</button>
+              <button data-q="From my sessions and whatever data available, describe my health">Health overview</button>
+              <button data-q="From my last 10 sessions, analyze posture_score, gait_symmetry, and balance_score for trends and give 2 recommendations">Trends + tips</button>
+            </div>
+            <textarea id="input" rows="3" placeholder="Ask about your sessions, posture, gait, balance..."></textarea>
+            <button id="send">Send</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="right">
+        <div class="card">
+          <h3>Overview</h3>
+          <div class="grid">
+            <div class="kpi">
+              <div class="label">Total Sessions</div>
+              <div id="kpi-total" class="value">—</div>
+            </div>
+            <div class="kpi">
+              <div class="label">Posture (all / last10)</div>
+              <div id="kpi-posture" class="value">—</div>
+            </div>
+            <div class="kpi">
+              <div class="label">Gait (all / last10)</div>
+              <div id="kpi-gait" class="value">—</div>
+            </div>
+            <div class="kpi">
+              <div class="label">Balance (all / last10)</div>
+              <div id="kpi-balance" class="value">—</div>
+            </div>
+            <div class="kpi">
+              <div class="label">Steps (all / last10)</div>
+              <div id="kpi-steps" class="value">—</div>
+            </div>
+            <div class="kpi">
+              <div class="label">Short sessions (last10)</div>
+              <div id="kpi-short" class="value">—</div>
+            </div>
+            <div class="kpi">
+              <div class="label">Recent alerts</div>
+              <div id="kpi-alerts" class="value">—</div>
+            </div>
+            <div class="kpi">
+              <div class="label">Recent recs</div>
+              <div id="kpi-recs" class="value">—</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+            <h3>Charts (last 10 sessions)</h3>
+            <div class="charts-grid">
+              <div class="chart-card">
+                <canvas id="chart-trend"></canvas>
+              </div>
+              <div class="chart-card">
+                <canvas id="chart-duration"></canvas>
+              </div>
+              <div class="chart-card">
+                <canvas id="chart-steps"></canvas>
+              </div>
+              <div class="chart-card">
+                <canvas id="chart-ar"></canvas>
+              </div>
+            </div>
+          </div>
+          
+  
+      </section>
+    </main>
+  </div>
+
+  <script src="/static/dashboard.js"></script>
+</body>
+</html>

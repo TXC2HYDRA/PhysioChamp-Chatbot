@@ -1,0 +1,460 @@
+{
+  "database": "Physiochamp",
+  "host": "10.173.222.60",
+  "port": 3306,
+  "tables": [
+    {
+      "table": "alerts",
+      "create_table": "('alerts', \"CREATE TABLE `alerts` (\\n  `id` int NOT NULL AUTO_INCREMENT,\\n  `session_id` int NOT NULL,\\n  `message` text,\\n  `level` enum('info','warning','critical') DEFAULT 'info',\\n  `timestamp` datetime DEFAULT CURRENT_TIMESTAMP,\\n  PRIMARY KEY (`id`),\\n  KEY `session_id` (`session_id`),\\n  CONSTRAINT `alerts_ibfk_1` FOREIGN KEY (`session_id`) REFERENCES `sessions` (`id`) ON DELETE CASCADE\\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci\")",
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "nullable": "NO",
+          "key": "PRI",
+          "default": null,
+          "extra": "auto_increment"
+        },
+        {
+          "name": "session_id",
+          "type": "int",
+          "nullable": "NO",
+          "key": "MUL",
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "message",
+          "type": "text",
+          "nullable": "YES",
+          "key": "",
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "level",
+          "type": "enum('info','warning','critical')",
+          "nullable": "YES",
+          "key": "",
+          "default": "info",
+          "extra": ""
+        },
+        {
+          "name": "timestamp",
+          "type": "datetime",
+          "nullable": "YES",
+          "key": "",
+          "default": "CURRENT_TIMESTAMP",
+          "extra": "DEFAULT_GENERATED"
+        }
+      ],
+      "sample_rows": []
+    },
+    {
+      "table": "recommendations",
+      "create_table": "('recommendations', \"CREATE TABLE `recommendations` (\\n  `id` int NOT NULL AUTO_INCREMENT,\\n  `session_id` int NOT NULL,\\n  `title` varchar(255) DEFAULT NULL,\\n  `category` enum('Balance','Posture','Mobility','Gait') DEFAULT NULL,\\n  `description` text,\\n  `media_url` varchar(500) DEFAULT NULL,\\n  PRIMARY KEY (`id`),\\n  KEY `session_id` (`session_id`),\\n  CONSTRAINT `recommendations_ibfk_1` FOREIGN KEY (`session_id`) REFERENCES `sessions` (`id`) ON DELETE CASCADE\\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci\")",
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "nullable": "NO",
+          "key": "PRI",
+          "default": null,
+          "extra": "auto_increment"
+        },
+        {
+          "name": "session_id",
+          "type": "int",
+          "nullable": "NO",
+          "key": "MUL",
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "title",
+          "type": "varchar(255)",
+          "nullable": "YES",
+          "key": "",
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "category",
+          "type": "enum('Balance','Posture','Mobility','Gait')",
+          "nullable": "YES",
+          "key": "",
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": "YES",
+          "key": "",
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "media_url",
+          "type": "varchar(500)",
+          "nullable": "YES",
+          "key": "",
+          "default": null,
+          "extra": ""
+        }
+      ],
+      "sample_rows": []
+    },
+    {
+      "table": "sensor_data",
+      "create_table": "('sensor_data', 'CREATE TABLE `sensor_data` (\\n  `id` bigint NOT NULL AUTO_INCREMENT,\\n  `session_id` int NOT NULL,\\n  `timestamp` double DEFAULT NULL,\\n  `left_foot` json DEFAULT NULL,\\n  `right_foot` json DEFAULT NULL,\\n  PRIMARY KEY (`id`),\\n  KEY `session_id` (`session_id`),\\n  CONSTRAINT `sensor_data_ibfk_1` FOREIGN KEY (`session_id`) REFERENCES `sessions` (`id`) ON DELETE CASCADE\\n) ENGINE=InnoDB AUTO_INCREMENT=110156 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci')",
+      "columns": [
+        {
+          "name": "id",
+          "type": "bigint",
+          "nullable": "NO",
+          "key": "PRI",
+          "default": null,
+          "extra": "auto_increment"
+        },
+        {
+          "name": "session_id",
+          "type": "int",
+          "nullable": "NO",
+          "key": "MUL",
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "timestamp",
+          "type": "double",
+          "nullable": "YES",
+          "key": "",
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "left_foot",
+          "type": "json",
+          "nullable": "YES",
+          "key": "",
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "right_foot",
+          "type": "json",
+          "nullable": "YES",
+          "key": "",
+          "default": null,
+          "extra": ""
+        }
+      ],
+      "sample_rows": [
+        {
+          "id": 1,
+          "session_id": 2,
+          "timestamp": 1752929422.0035052,
+          "left_foot": "[0.83, 0.91, 0.99, 0.67, 0.4, 0.06, -0.0, -0.03, 0.03, -0.02]",
+          "right_foot": "[0.04, 0.05, 0.03, 0.29, 0.57, 0.78, 0.95, 0.87, 0.84, 0.54]"
+        },
+        {
+          "id": 2,
+          "session_id": 2,
+          "timestamp": 1752929422.2092876,
+          "left_foot": "[0.45, 0.52, 0.66, 0.93, 1.02, 0.85, 0.66, 0.5, 0.39, 0.29]",
+          "right_foot": "[0.05, -0.04, 0.02, -0.0, -0.03, -0.0, 0.04, 0.0, 0.01, 0.02]"
+        }
+      ]
+    },
+    {
+      "table": "session_scores",
+      "create_table": "('session_scores', 'CREATE TABLE `session_scores` (\\n  `id` int NOT NULL AUTO_INCREMENT,\\n  `session_id` varchar(100) DEFAULT NULL,\\n  `posture_score` float DEFAULT NULL,\\n  `gait_score` float DEFAULT NULL,\\n  `balance_score` float DEFAULT NULL,\\n  `timestamp` datetime DEFAULT CURRENT_TIMESTAMP,\\n  PRIMARY KEY (`id`)\\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci')",
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "nullable": "NO",
+          "key": "PRI",
+          "default": null,
+          "extra": "auto_increment"
+        },
+        {
+          "name": "session_id",
+          "type": "varchar(100)",
+          "nullable": "YES",
+          "key": "",
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "posture_score",
+          "type": "float",
+          "nullable": "YES",
+          "key": "",
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "gait_score",
+          "type": "float",
+          "nullable": "YES",
+          "key": "",
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "balance_score",
+          "type": "float",
+          "nullable": "YES",
+          "key": "",
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "timestamp",
+          "type": "datetime",
+          "nullable": "YES",
+          "key": "",
+          "default": "CURRENT_TIMESTAMP",
+          "extra": "DEFAULT_GENERATED"
+        }
+      ],
+      "sample_rows": []
+    },
+    {
+      "table": "sessions",
+      "create_table": "('sessions', 'CREATE TABLE `sessions` (\\n  `id` int NOT NULL AUTO_INCREMENT,\\n  `user_id` int NOT NULL,\\n  `start_time` datetime DEFAULT NULL,\\n  `end_time` datetime DEFAULT NULL,\\n  `posture_score` float DEFAULT NULL,\\n  `gait_symmetry` float DEFAULT NULL,\\n  `balance_score` float DEFAULT NULL,\\n  `status` varchar(20) DEFAULT NULL,\\n  `step_count` int DEFAULT NULL,\\n  `stride_time_s` double DEFAULT NULL,\\n  `stride_length_m` double DEFAULT NULL,\\n  `contact_time_s` double DEFAULT NULL,\\n  `cadence_spm` double DEFAULT NULL,\\n  `swing_stance_ratio` double DEFAULT NULL,\\n  `heel_toe_timing` text,\\n  PRIMARY KEY (`id`),\\n  KEY `user_id` (`user_id`),\\n  CONSTRAINT `sessions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE\\n) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci')",
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "nullable": "NO",
+          "key": "PRI",
+          "default": null,
+          "extra": "auto_increment"
+        },
+        {
+          "name": "user_id",
+          "type": "int",
+          "nullable": "NO",
+          "key": "MUL",
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "start_time",
+          "type": "datetime",
+          "nullable": "YES",
+          "key": "",
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "end_time",
+          "type": "datetime",
+          "nullable": "YES",
+          "key": "",
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "posture_score",
+          "type": "float",
+          "nullable": "YES",
+          "key": "",
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "gait_symmetry",
+          "type": "float",
+          "nullable": "YES",
+          "key": "",
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "balance_score",
+          "type": "float",
+          "nullable": "YES",
+          "key": "",
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "status",
+          "type": "varchar(20)",
+          "nullable": "YES",
+          "key": "",
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "step_count",
+          "type": "int",
+          "nullable": "YES",
+          "key": "",
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "stride_time_s",
+          "type": "double",
+          "nullable": "YES",
+          "key": "",
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "stride_length_m",
+          "type": "double",
+          "nullable": "YES",
+          "key": "",
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "contact_time_s",
+          "type": "double",
+          "nullable": "YES",
+          "key": "",
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "cadence_spm",
+          "type": "double",
+          "nullable": "YES",
+          "key": "",
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "swing_stance_ratio",
+          "type": "double",
+          "nullable": "YES",
+          "key": "",
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "heel_toe_timing",
+          "type": "text",
+          "nullable": "YES",
+          "key": "",
+          "default": null,
+          "extra": ""
+        }
+      ],
+      "sample_rows": [
+        {
+          "id": 2,
+          "user_id": 1,
+          "start_time": "2025-07-19 18:20:21",
+          "end_time": "2025-07-19 18:20:50",
+          "posture_score": null,
+          "gait_symmetry": null,
+          "balance_score": null,
+          "status": null,
+          "step_count": null,
+          "stride_time_s": null,
+          "stride_length_m": null,
+          "contact_time_s": null,
+          "cadence_spm": null,
+          "swing_stance_ratio": null,
+          "heel_toe_timing": null
+        },
+        {
+          "id": 3,
+          "user_id": 1,
+          "start_time": "2025-07-19 18:22:36",
+          "end_time": "2025-07-19 18:22:51",
+          "posture_score": null,
+          "gait_symmetry": null,
+          "balance_score": null,
+          "status": null,
+          "step_count": null,
+          "stride_time_s": null,
+          "stride_length_m": null,
+          "contact_time_s": null,
+          "cadence_spm": null,
+          "swing_stance_ratio": null,
+          "heel_toe_timing": null
+        }
+      ]
+    },
+    {
+      "table": "users",
+      "create_table": "('users', \"CREATE TABLE `users` (\\n  `id` int NOT NULL AUTO_INCREMENT,\\n  `name` varchar(100) NOT NULL,\\n  `email` varchar(100) DEFAULT NULL,\\n  `age` int DEFAULT NULL,\\n  `gender` enum('male','female','other') DEFAULT NULL,\\n  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,\\n  PRIMARY KEY (`id`),\\n  UNIQUE KEY `email` (`email`)\\n) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci\")",
+      "columns": [
+        {
+          "name": "id",
+          "type": "int",
+          "nullable": "NO",
+          "key": "PRI",
+          "default": null,
+          "extra": "auto_increment"
+        },
+        {
+          "name": "name",
+          "type": "varchar(100)",
+          "nullable": "NO",
+          "key": "",
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "email",
+          "type": "varchar(100)",
+          "nullable": "YES",
+          "key": "UNI",
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "age",
+          "type": "int",
+          "nullable": "YES",
+          "key": "",
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "gender",
+          "type": "enum('male','female','other')",
+          "nullable": "YES",
+          "key": "",
+          "default": null,
+          "extra": ""
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "nullable": "YES",
+          "key": "",
+          "default": "CURRENT_TIMESTAMP",
+          "extra": "DEFAULT_GENERATED"
+        }
+      ],
+      "sample_rows": [
+        {
+          "id": 1,
+          "name": "admin",
+          "email": null,
+          "age": null,
+          "gender": null,
+          "created_at": "2025-07-19 18:20:07"
+        },
+        {
+          "id": 2,
+          "name": "admin",
+          "email": null,
+          "age": null,
+          "gender": null,
+          "created_at": "2025-07-22 21:00:53"
+        }
+      ]
+    }
+  ]
+}
